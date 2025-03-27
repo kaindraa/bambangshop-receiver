@@ -24,7 +24,7 @@ The notification will be sent using HTTP POST request, so you need to make the r
 
 ## API Documentations
 
-“(kaindraa removed the Postman Collection link to comply with GitHub push protection policies)”
+You can download the Postman Collection JSON here: https://ristek.link/AdvProgWeek7Postman
 
 After you download the Postman Collection, you can try the endpoints inside "BambangShop Receiver" folder.
 
