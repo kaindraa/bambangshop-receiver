@@ -97,3 +97,17 @@ Sementara itu, Mutex hanya mengizinkan satu thread untuk mengakses data pada sat
 Rust tidak mengizinkan mutasi langsung terhadap variabel `static` seperti di Java untuk mencegah race condition dan akses data yang tidak aman secara bawaan. Untuk menjaga keamanan dan konsistensi data dalam lingkungan multithreaded, Rust mewajibkan penggunaan mekanisme sinkronisasi seperti RwLock atau Mutex. Selain itu, variabel global yang dapat diubah harus didefinisikan menggunakan bantuan crate seperti lazy_static, sehingga akses terhadap data tetap terkontrol dan aman.
 
 #### Reflection Subscriber-2
+
+> Have you explored things outside of the steps in the tutorial, for example: src/lib.rs? If not, explain why you did not do so. If yes, explain things that you have learned from those other parts of code.
+
+Ya, saya sudah explore src/main.rs. File ini bertanggung jawab untuk menjalankan aplikasi dengan framework Rocket. Di dalamnya, environment variable dimuat menggunakan `dotenv()` dan aplikasi dibangun menggunakan `rocket::build()` dengan konfigurasi tambahan seperti HTTP client dan route handler. Fungsi `route_stage()` dari modul `controller` digunakan untuk mendaftarkan semua endpoint yang akan dilayani. Selain itu, file ini juga mendeklarasikan modul-modul penting seperti `controller`, `service`, `repository`, dan `model` yang merepresentasikan struktur arsitektur aplikasi.
+
+> Since you have completed the tutorial by now and have tried to test your notification system by spawning multiple instances of Receiver, explain how Observer pattern eases you to plug in more subscribers. How about spawning more than one instance of Main app, will it still be easy enough to add to the system?
+
+Observer pattern sangat membantu dalam menambahkan lebih banyak subscriber karena setiap subscriber hanya perlu melakukan proses subscribe ke Main app tanpa perlu mengubah kode di sisi publisher. Notifikasi akan secara otomatis dikirim ke semua subscriber yang sudah terdaftar. Ini membuat sistem menjadi fleksibel dan scalable karena subscriber baru bisa ditambahkan kapan saja tanpa memengaruhi komponen lain dalam sistem.
+
+Jika ingin menambahkan lebih dari satu instance Main app (publisher), kompleksitas akan meningkat. Hal ini karena pada sistem dengan banyak publisher, tidak ada jaminan bahwa semua subscriber terhubung ke publisher yang sesuai. Setiap publisher hanya mengetahui subscriber yang mendaftar langsung kepadanya.  Oleh karena itu, sistem dengan banyak publisher memerlukan pendekatan tambahan untuk memastikan semua notifikasi tersampaikan dengan benar ke subscriber yang sesuai.
+
+> Have you tried to make your own Tests, or enhance documentation on your Postman collection? If you have tried those features, tell us whether it is useful for your work (it can be your tutorial work or your Group Project).
+
+Saya telah mencoba menambahkan dokumentasi pada koleksi Postman, terutama di bagian deskripsi setiap request. Fitur ini sangat membantu jika digunakan bersama tim dalam proyek kelompok, agar semua anggota kelompok dapat memahami API lebih mudah.
